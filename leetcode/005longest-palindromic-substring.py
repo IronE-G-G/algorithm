@@ -39,16 +39,14 @@ class Solution1(object):
         maxlen = 1
         res = s[0]
         arr = [[False for _ in range(slen)] for _ in range(slen)]
-        for right in range(1,slen):
+        for right in range(1, slen):
             for left in range(right):
-                if s[left]==s[right] and ((right-left<=2) or arr[left+1][right-1]):
+                if s[left] == s[right] and ((right - left <= 2) or arr[left + 1][right - 1]):
                     arr[left][right] = True
-                    if right-left+1>maxlen:
-                        maxlen = right-left+1
-                        res = s[left:(right+1)]
+                    if right - left + 1 > maxlen:
+                        maxlen = right - left + 1
+                        res = s[left:(right + 1)]
         return res
-
-
 
 
 if __name__ == '__main__':
