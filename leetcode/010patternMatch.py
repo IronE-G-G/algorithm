@@ -24,7 +24,10 @@ class Solution1:
 
 class Solution2:
     """
-    动态规划：状态，状态转移
+    动态规划：
+    状态：
+    dp[i][j]为s[:i] p[:j]是否匹配
+
     """
     def isMatch(self, s: str, p: str) -> bool:
         lens, lenp = len(s), len(p)

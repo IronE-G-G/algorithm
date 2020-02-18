@@ -10,7 +10,7 @@ class Solution(object):
         """
         :type s: str
         :rtype: bool
-        有限自动机如图片65所示
+        有限自动机,如65ValidNum.jpg所示
         """
         s = s.strip()
         finalState = [2, 4, 6, 8]
