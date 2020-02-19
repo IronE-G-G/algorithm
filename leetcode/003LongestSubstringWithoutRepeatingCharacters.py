@@ -1,6 +1,8 @@
 """
-无重复字符的最长子串
+3 无重复字符的最长子串
 给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。
+
+思路：暴力算法；双指针滑动窗口
 
 思路1:用i标记子串的起始位置，j从起始位置开始遍历。如果遇到重复的，则i移动到字典中重复字符所在位置的后一位（回溯）
 边界处理：j遍历完的时候要终止while。
@@ -11,11 +13,38 @@
 """
 
 
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        双指针滑动窗口
+        """
+        if not s:
+            return 0
+        left, right = 0, 0
+        lens = len(s)
+        maxlen = 0
+        windows = set()
+        while right < lens:
+            if s[right] not in windows:
+                windows.add(s[right])
+                maxlen = max(maxlen, right - left + 1)
+            else:
+                while s[left] != s[right]:
+                    windows.remove(s[left])
+                    left += 1
+                left += 1
+            right += 1
+        return maxlen
+
+
 class Solution1(object):
     def lengthOfLongestSubstring(self, s):
         """
         :type s: str
         :rtype: int
+        回溯算法
         """
         if not s:
             return 0
