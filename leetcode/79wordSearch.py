@@ -17,6 +17,7 @@ board =
 给定 word = "SEE", 返回 true.
 给定 word = "ABCB", 返回 false.
 
+类似题目：130 包围区域；200 岛屿数量
 """
 
 
