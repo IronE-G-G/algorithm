@@ -1,5 +1,5 @@
 # Algorithm
-* 20200220 leetcode 86-95题
+* 20200220 leetcode 86-96题
 * 20200219 leetcode 75-85题
 * 20200218 leetcode 61-74题
 * 20200217 leetcode 48-60题
