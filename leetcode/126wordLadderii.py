@@ -1,5 +1,5 @@
 """
-127 单词接龙ii
+126 单词接龙ii
 给定两个单词（beginWord 和 endWord）和一个字典 wordList，找出所有从 beginWord 到 endWord 的最短转换序列。转换需遵循如下规则：
 
 每次转换只能改变一个字母。
@@ -33,6 +33,7 @@ wordList = ["hot","dot","dog","lot","log","cog"]
 class Solution:
     """
     leetcode python3 编辑器
+    BFS
     """
     def findLadders(self, beginWord: str, endWord: str, wordList: List[str]) -> List[List[str]]:
         wordList = set(wordList)
