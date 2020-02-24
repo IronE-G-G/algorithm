@@ -32,24 +32,17 @@ class Solution1(object):
         """
         :type root: TreeNode
         :rtype: List[int]
-        栈方法收集待处理的父节点
         """
         if not root:
             return []
-        stack = [root]
+        stack = []
         res = []
-
-        while root.left:
-            stack.append(root.left)
-            root = root.left
-        while stack:
-            node = stack.pop()
-            res.append(node.val)
-            if node.right:
-                stack.append(node.right)
-                nodeR = node.right
-                while nodeR.left:
-                    stack.append(nodeR.left)
-                    nodeR = nodeR.left
+        cur = root
+        while stack or cur:
+            while cur:
+                stack.append(cur)
+                cur = cur.left
+            cur = stack.pop()
+            res.append(cur.val)
+            cur = cur.right
         return res
-
