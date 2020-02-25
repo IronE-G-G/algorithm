@@ -19,6 +19,7 @@ class Solution(object):
         :type s: str
         :rtype: int
         双指针滑动窗口
+        模版
         """
         if not s:
             return 0
@@ -73,17 +74,21 @@ class Solution2(object):
         """
         :type s: str
         :rtype: int
+        双指针
         """
-        if not s:
-            return 0
-        length = len(s)
-        i = -1
-        uniqueSet = dict()
-        maxCount = 0
-        for j in range(length):
-            if s[j] in uniqueSet:
-                # 如果重复了，则检查重复字符所在位置是否大于i，大于的话则i指向重复字符所在位置
-                i = max(i, uniqueSet[s[j]])
-            maxCount = max(maxCount, j - i)
-            uniqueSet[s[j]] = j
-        return maxCount
+        lookup = dict()
+        left, right = 0, 0
+        maxlen = 0
+        while right < len(s):
+            if s[right] in lookup and lookup[s[right]] >= left:
+                left = lookup[s[right]] + 1
+
+            lookup[s[right]] = right
+            right += 1
+            maxlen = max(maxlen, right - left)
+
+        return maxlen
+
+
+
+
