@@ -20,6 +20,8 @@
 链接：https://leetcode-cn.com/problems/max-points-on-a-line
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 """
+
+
 class Solution(object):
     def maxPoints(self, points):
         """
@@ -29,12 +31,13 @@ class Solution(object):
         """
         if len(points) < 3:
             return len(points)
-        res = 2
+        res = 0
         N = len(points)
-        duplicates = 0
+
         for i in range(N):
             hashMap = dict()
-            maxsize = 2
+            duplicates = 0
+            maxsize = 0
             for j in range(i + 1, N):
                 x = points[j][0] - points[i][0]
                 y = points[j][1] - points[i][1]
@@ -51,11 +54,11 @@ class Solution(object):
                     y = y // c
                     key = '%d@%d' % (x, y)
                 if key not in hashMap:
-                    hashMap[key] = 2
+                    hashMap[key] = 1
                 else:
                     hashMap[key] += 1
-                    maxsize = max(maxsize, hashMap[key])
-            res = max(res, maxsize + duplicates)
+                maxsize = max(maxsize, hashMap[key])
+            res = max(res, maxsize + duplicates + 1)
         return res
 
     def gcd(self, a, b):
