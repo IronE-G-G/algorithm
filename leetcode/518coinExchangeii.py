@@ -12,6 +12,7 @@ class Solution:
                     dp[i] += dp[i - c]
         return dp[-1]
 
+
 if __name__ == '__main__':
     s = Solution()
     print(s.change(10,[1,2,5]))
