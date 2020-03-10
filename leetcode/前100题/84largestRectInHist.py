@@ -8,6 +8,18 @@
 
 """
 
+class Solution1:
+    def largestRectangleArea(self, heights: List[int]) -> int:
+        """
+        1 暴力 On2 之间的最小值
+        """
+        res = 0
+        for i in range(len(heights)):
+            min_height = heights[i]
+            for j in range(i,len(heights)):
+                min_height = min(min_height, heights[j])
+                res = max(res, (j-i+1)*min_height)
+        return res
 
 class Solution(object):
     def largestRectangleArea(self, heights):
