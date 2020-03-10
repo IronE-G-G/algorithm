@@ -68,3 +68,33 @@ class Solution1(object):
                 dp[i][k][0] = max(dp[i - 1][k][0], dp[i - 1][k][1] + prices[i - 1])
                 dp[i][k][1] = max(dp[i - 1][k][1], dp[i - 1][k - 1][0] - prices[i - 1])
         return dp[-1][1][0]
+
+
+class Solution2:
+    def maxProfit(self, prices: List[int]) -> int:
+        """
+        差分转化为最大连续子序列和
+        """
+        last, res = 0, 0
+        for i in range(len(prices) - 1):
+            last = max(0, last) + prices[i + 1] - prices[i]
+            res = max(res, last)
+        return res
+
+
+class Solution3:
+    def maxProfit(self, prices: List[int]) -> int:
+        """
+        单调栈
+        """
+        res = 0
+        stack = []
+        i = 0
+        while i < len(prices):
+            while stack and prices[i] <= stack[-1]:
+                stack.pop()
+            stack.append(prices[i])
+            if len(stack) >= 2:
+                res = max(res, stack[-1] - stack[0])
+            i += 1
+        return res
