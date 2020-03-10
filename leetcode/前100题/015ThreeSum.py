@@ -13,27 +13,32 @@
 
 
 class Solution:
-    def threeSum(self, nums):
-        if len(nums) < 3:
-            return []
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        """
+        1 暴力 On3
+        2 先排序，固定最小的一个，双指针找右边两个数之和等于最小的一个 On2
+        """
         nums.sort()
+        begin = 0
         res = []
-        length = len(nums)
-        for ind in range(length):
-            if ind > 0 and nums[ind] == nums[ind - 1]:
+        while begin < len(nums) - 2 and nums[begin] <= 0:
+            if begin > 0 and nums[begin] == nums[begin - 1]:
+                begin += 1
                 continue
-            else:
-                start, end = ind + 1, length - 1
-                while start < end:
-                    sum3 = nums[ind] + nums[start] + nums[end]
-                    if sum3 == 0:
-                        res.append([nums[ind], nums[start], nums[end]])
-                        start += 1
-                        # 对start进行去重
-                        while start < end and nums[start] == nums[start - 1]:
-                            start += 1
-                    elif sum3 > 0:
-                        end -= 1
-                    else:
-                        start += 1
+            left, right = begin + 1, len(nums) - 1
+            while left < right:
+                if left > begin + 1 and nums[left] == nums[left - 1]:
+                    left += 1
+                    continue
+                if nums[left] + nums[right] == -nums[begin]:
+                    res.append([nums[begin], nums[left], nums[right]])
+                    left += 1
+                elif nums[left] + nums[right] > -nums[begin]:
+                    right -= 1
+                else:
+                    left += 1
+            begin += 1
         return res
+
+
+

@@ -7,23 +7,15 @@
 """
 
 
-class Solution(object):
-    def maxSubArray(self, nums):
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
         """
-        :type nums: List[int]
-        :rtype: int
-        dp
+        1 暴力 On3 On2
+        2 dp 以元素i为结尾的最大子序和，On 空间复杂度压缩一下,以前一个元素为结尾的最大子序列和
         """
-        if not nums:
-            return 0
-        if len(nums) == 1:
-            return nums[0]
-        n = len(nums)
-        dp = [0 for _ in range(n)]
-        dp[0] = nums[0]
-        for i in range(1, n):
-            if dp[i - 1] > 0:
-                dp[i] = dp[i - 1] + nums[i]
-            else:
-                dp[i] = nums[i]
-        return max(dp)
+        pre = nums[0]
+        res = pre
+        for i in range(1, len(nums)):
+            pre = max(pre, 0) + nums[i]
+            res = max(pre, res)
+        return res

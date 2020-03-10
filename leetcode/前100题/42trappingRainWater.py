@@ -5,70 +5,49 @@
 """
 
 
-class Solution(object):
-    """
-    暴力法，对每个元素都求它左右两边的最大高度，O(n2)
-    """
+class Solution:
+    def trap(self, height: List[int]) -> int:
+        """
+        1 暴力 如何确定坐标i的高度，找左右两边最高的位置, maxMin
+        2 leftmax维护一个单调递增栈，rightmax也维护一个单调递增栈，逆序进
+        """
+        res = 0
+        for i in range(1, len(height) - 1):
+            left = i - 1
+            right = i + 1
+            max_left, max_right = 0, 0
+            while left >= 0:
+                max_left = max(max_left, height[left])
+                left -= 1
+            while right < len(height):
+                max_right = max(max_right, height[right])
+                right += 1
+            res += max(min(max_left, max_right), height[i]) - height[i]
 
-    def trap(self, height):
+        return res
+
+
+class Solution1:
+    def trap(self, height: List[int]) -> int:
         """
-        :type height: List[int]
-        :rtype: int
+        2 dp保存leftmax和rightmax
         """
-        if len(height) <= 2:
+        if not height:
             return 0
+        leftmax = [-1]
+        pre_leftmax = height[0]
+        for i in range(1, len(height) - 1):
+            leftmax.append(pre_leftmax)
+            pre_leftmax = max(pre_leftmax, height[i])
 
-        rainHeight = [height[0]]
-        i = 1
-        n = len(height)
-        while i < n - 1:
-            left = 0
-            maxleft = 0
-            right = n - 1
-            maxright = n - 1
-            target = height[i]
-            while left < i:
-                if height[left] >= height[maxleft]:
-                    maxleft = left
-                left += 1
-            while right > i:
-                if height[right] >= height[maxright]:
-                    maxright = right
-                right -= 1
-            res = max(target, min(height[maxleft], height[maxright]))
-            rainHeight.append(res)
-            i += 1
-        total = 0
-        for i in range(n - 1):
-            total += (rainHeight[i] - height[i])
-        return total
+        rightmax = [-1 for _ in range(len(height))]
+        pre_rightmax = height[-1]
+        for i in range(len(height) - 2, 0, -1):
+            rightmax[i] = pre_rightmax
+            pre_rightmax = max(pre_rightmax, height[i])
+        res = 0
+        for i in range(1, len(height) - 1):
+            res = res + max(height[i], min(leftmax[i], rightmax[i])) - height[i]
+        return res
 
 
-class Solution1(object):
-    def trap(self, height):
-        """
-        :type height: List[int]
-        :rtype: int
-
-        dp求元素左右两边的最大高度
-        """
-
-        n = len(height)
-        if n <= 2:
-            return 0
-        maxleft = [-1, height[0]]
-        for i in range(2, n - 1):
-            left = max(maxleft[-1], height[i - 1])
-            maxleft.append(left)
-        maxleft.append(-1)
-        maxright = [-1, height[-1]]
-        for i in range(n - 3, 0, -1):
-            right = max(maxright[-1], height[i + 1])
-            maxright.append(right)
-        maxright.append(-1)
-        maxright.reverse()
-        total = 0
-        for i in range(n):
-            rainHeight = max(height[i], min(maxleft[i], maxright[i]))
-            total += (rainHeight - height[i])
-        return total
