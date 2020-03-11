@@ -52,7 +52,7 @@
   * 回溯+剪枝 🍎
   * dp  🍎
   * 贪心算法  🍎
-* <font color=green>lc-121 买卖股票的最佳时机</font>
+* <font color=green>lc-121 买卖股票的最佳时机</font> $\color{#FF3030}{red}$
   * 暴力  🍎
   * 动态规划 (dpi维护第i-1天之前买入的最低价格) 🍎
 * lc-88 合并两个有序数组（简单）
