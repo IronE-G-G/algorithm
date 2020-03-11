@@ -1,4 +1,6 @@
 # Algorithm
+* 20200311 leetcode 数组tag（10道）
+* 20200310 leetcode 数组tag（10道）
 * 20200307 leetcode top100补全（4道）
 * 20200306 leetcode top100补全（5道）
 * 20200305 leetcode top100补全（5道）新学数据结构：前缀树；算法：拓扑排序
