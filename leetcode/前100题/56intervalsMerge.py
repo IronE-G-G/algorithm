@@ -37,3 +37,18 @@ class Solution(object):
                 end = begin + 1
         res.append(intervals[begin])
         return res
+
+
+class Solution1:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        """
+        1 sort+维护输出结果
+        """
+        intervals.sort()
+        stack = []
+        for i in range(len(intervals)):
+            if stack and stack[-1][1] >= intervals[i][0]:
+                stack[-1][1] = max(stack[-1][1], intervals[i][1])
+                continue
+            stack.append(intervals[i])
+        return stack
