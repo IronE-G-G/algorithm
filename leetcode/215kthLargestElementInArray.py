@@ -22,6 +22,31 @@
 """
 
 
+class Solution1:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        """
+        partition应用
+        """
+
+        def partition(arr, k):
+            left, mid, right = [], [], []
+            for num in arr:
+                if num == arr[0]:
+                    mid.append(num)
+                elif num < arr[0]:
+                    left.append(num)
+                else:
+                    right.append(num)
+            if len(left) >= k:
+                return partition(left, k)
+            elif len(left) + len(mid) >= k:
+                return mid[0]
+            else:
+                return partition(right, k - len(left) - len(mid))
+
+        return partition(nums, len(nums) - k + 1)
+
+
 class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
         """
